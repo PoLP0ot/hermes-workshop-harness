@@ -5,7 +5,7 @@ A ready-to-run Hermes Agent profile for AI-assisted full-stack app generation us
 ## What's included
 
 - **`harness-workflow` skill** — the universal project pipeline: PM decomposes into user stories → Claude Code `/plan` → `/code` in TDD → Hermes QA gate
-- **`claude-code` / `claude-code-low-latency` skills** — delegate all code to Claude Code via tmux (interactive mode, NEVER `claude -p`)
+- **`claude-code` / `claude-code-low-latency` skills** — delegate all code to Claude Code via tmux (buffer method, `--dangerously-skip-permissions`, hook state signaling via `/tmp/claude-state.json`)
 - **`open-design` skill + MCP server config** — AI-driven high-fidelity design mockups
 - **20+ supporting skills** — TDD, code review, debugging, architecture diagrams, GitHub PR workflow, etc.
 - **Memory pre-loaded** with Docker/uv workflow conventions and tmux patterns
@@ -57,6 +57,24 @@ brew install tmux
 
 ```bash
 hermes profile import hermes-workshop.tar.gz
+```
+
+### Install Claude Code harness (per project)
+
+The workshop profile's `hermes-project-init` script auto-installs the Claude Code harness from the dedicated repo:
+
+```bash
+# When creating a new project:
+hermes-project-init my-app "My app description"
+# → auto-clones https://github.com/PoLP0ot/claude-harness
+# → installs .claude/skills, rules, agents, hooks, settings, claude-state.sh
+```
+
+To install manually on an existing project:
+
+```bash
+git clone https://github.com/PoLP0ot/claude-harness.git /tmp/claude-harness
+/tmp/claude-harness/scripts/install.sh /path/to/your-project
 ```
 
 ### Configure your API keys
@@ -131,6 +149,11 @@ README.md                 # This file
 **uv permission errors in Docker**: `chown -R hermes:hermes /opt/hermes/.venv/` from root, then use `uv pip install` (never plain `pip`).
 
 **`hermes-project-init` fails**: ensure `gh` CLI is installed and authenticated.
+
+## Related
+
+- [Claude Code Harness](https://github.com/PoLP0ot/claude-harness) — reusable `.claude/` skills, rules, agents, hooks, state signaling
+- [harness-workflow skill](https://github.com/PoLP0ot/hermes-workshop-harness/blob/main/README.md) — full workflow documentation
 
 ## License
 
