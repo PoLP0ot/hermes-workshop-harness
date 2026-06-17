@@ -140,6 +140,8 @@ IDEA
 ```
 hermes-workshop.tar.gz    # Profile archive (import via `hermes profile import`)
 README.md                 # This file
+docs/                     # Extended documentation
+  claude-code-setup-guide.md  # Auth, tmux launch, harness install, monitoring
 ```
 
 ## Troubleshooting
@@ -153,6 +155,7 @@ README.md                 # This file
 ## Related
 
 - [Claude Code Harness](https://github.com/PoLP0ot/claude-harness) — reusable `.claude/` skills, rules, agents, hooks, state signaling
+- [Claude Code Setup & Integration Guide](docs/claude-code-setup-guide.md) — auth (OAuth `#` trap, PKCE binding), tmux launch, harness install, state monitoring
 - [harness-workflow skill](https://github.com/PoLP0ot/hermes-workshop-harness/blob/main/README.md) — full workflow documentation
 
 ## License
