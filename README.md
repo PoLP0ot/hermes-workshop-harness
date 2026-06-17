@@ -24,7 +24,8 @@ curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scri
 **Claude Code** (Anthropic's coding agent):
 ```bash
 npm install -g @anthropic-ai/claude-code
-# Authenticate: claude
+# Then follow the [Setup & Integration Guide](docs/claude-code-setup-guide.md) for auth
+# DO NOT just run `claude` — you'll hit the OAuth # trap
 ```
 
 **Node.js 24** (required for Open Design MCP server):
@@ -51,7 +52,22 @@ apt-get install -y tmux
 brew install tmux
 ```
 
+### 3. Configure Claude Code (authentication + harness)
+
+**Follow the [Claude Code Setup & Integration Guide](docs/claude-code-setup-guide.md) before proceeding.** This covers:
+
+- **Authentication**: the OAuth `#` trap (the #1 failure point), PKCE session binding, headless auth via tmux
+- **Harness installation**: `install.sh` per project (skills, rules, agents, hooks, state signaling)
+- **Launch sequence**: tmux session creation, `--dangerously-skip-permissions`, dialog handling
+- **Monitoring**: `/tmp/claude-state.json` polling instead of `capture-pane`
+- **Pitfalls checklist**: 10 common failures and their fixes
+- **Quick reference card**: copy-paste commands for auth, launch, monitoring
+
+> ⚠️ Skipping this guide is the #1 cause of "Claude Code won't work" issues.
+
 ## Quick Start
+
+> **⚠️ Prerequisites required first.** If Claude Code isn't authenticated yet, stop and read the [Claude Code Setup & Integration Guide](docs/claude-code-setup-guide.md). The OAuth `#` trap and PKCE binding will block you otherwise.
 
 ### Import the profile
 
